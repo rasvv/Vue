@@ -3,13 +3,13 @@
     <input v-model="a" type="text" />
     <input v-model="b" type="text" />
     = {{ result }}
-    <div>
-      <button @click="calculate('+')">+</button>
-      <button @click="calculate('-')">-</button>
-      <button @click="calculate('/')">/</button>
-      <button @click="calculate('*')">*</button>
-      <button @click="calculate('^')">^</button>
-      <button @click="calculate('%')">%</button>
+    <div class="buttons">
+      <button @click="calculate('+')">Сложить</button>
+      <button @click="calculate('-')">Вычесть</button>
+      <button @click="calculate('/')">Разделить</button>
+      <button @click="calculate('*')">Умножить</button>
+      <button @click="calculate('^')">Возвести в степень</button>
+      <button @click="calculate('%')">Целочисленное деление</button>
     </div>
   </div>
 </template>
@@ -44,7 +44,7 @@ export default {
           this.result = Math.pow(+this.a, +this.b)
           break
         case '%':
-          this.result = +this.a % +this.b
+          this.result = Math.round(+this.a / +this.b)
           break
       }
     }
@@ -67,5 +67,12 @@ li {
 }
 a {
   color: #42b983;
+}
+button {
+  margin-right: 10px;
+}
+
+.buttons {
+  margin-top: 15px;
 }
 </style>
