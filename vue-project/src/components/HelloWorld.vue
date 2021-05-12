@@ -58,7 +58,7 @@ export default {
           '/': () => oper1 / oper2,
           '*': () => oper1 * oper2,
           '^': () => Math.pow(oper1, oper2),
-          '%': () => Math.round(oper1 / oper2)
+          '%': () => parseInt(oper1 / oper2)
         }
         this.result = calcRes[fun]()
       }
