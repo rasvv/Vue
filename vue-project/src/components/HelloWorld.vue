@@ -1,27 +1,28 @@
 <template>
   <div class="hello">
-    <input v-model.lazy="oper1" />
+    <input v-model.number.lazy="oper1" />
     <input v-model.number.lazy="oper2" />
     = {{ result }}
-    <br>
-    <br>
-    <input type="checkbox" id="checkbox" v-model="checked" >
+    <br />
+    <br />
+    <input type="checkbox" id="checkbox" v-model="checked" />
     <label for="checkbox">Вывести экранную клавиатуру </label>
 
     <div class="numberbuttons" v-show="checked">
-      <input type="radio" id="left" value="Операнд1" v-model="picked" >
+      <input type="radio" id="left" value="Операнд1" v-model="picked" />
       <label for="left">Операнд1</label>
 
-      <input type="radio" id="right" value="Операнд2" v-model="picked">
+      <input type="radio" id="right" value="Операнд2" v-model="picked" />
       <label for="right">Операнд2</label>
-      <br>
+      <br />
 
-      <br>
-      <button v-for="num in numbers"  @click="fill(num)" :key="num">
+      <br />
+      <button v-for="num in numbers" @click="fill(num)" :key="num">
         {{ num }}
       </button>
     </div>
     <div class="buttons">
+      <h5>Операция</h5>
       <button v-for="opera in operators" @click="calculate(opera)" :key="opera">
         {{ opera }}
       </button>
@@ -48,18 +49,26 @@ export default {
   methods: {
     calculate (fun) {
       const { oper1, oper2 } = this
-      const calcRes = {
-        '+': () => oper1 + oper2,
-        '-': () => oper1 - oper2,
-        '/': () => oper1 / oper2,
-        '*': () => oper1 * oper2,
-        '^': () => Math.pow(oper1, oper2),
-        '%': () => Math.round(oper1 / oper2)
+      if ((fun === '/' || fun === '%') && oper2 === 0) {
+        alert('На ноль делить нельзя')
+      } else {
+        const calcRes = {
+          '+': () => oper1 + oper2,
+          '-': () => oper1 - oper2,
+          '/': () => oper1 / oper2,
+          '*': () => oper1 * oper2,
+          '^': () => Math.pow(oper1, oper2),
+          '%': () => Math.round(oper1 / oper2)
+        }
+        this.result = calcRes[fun]()
       }
-      this.result = calcRes[fun]()
     },
     fill (num) {
-      if (this.picked === 'Операнд1') { this.strOper = this.oper1.toString() } else { this.strOper = this.oper2.toString() }
+      if (this.picked === 'Операнд1') {
+        this.strOper = this.oper1.toString()
+      } else {
+        this.strOper = this.oper2.toString()
+      }
 
       if (num === '<-') {
         if (this.strOper.length === 1) {
@@ -74,7 +83,11 @@ export default {
           this.strOper = this.strOper.concat(num.toString())
         }
       }
-      if (this.picked === 'Операнд1') { this.oper1 = +this.strOper } else { this.oper2 = +this.strOper }
+      if (this.picked === 'Операнд1') {
+        this.oper1 = +this.strOper
+      } else {
+        this.oper2 = +this.strOper
+      }
     }
   }
 }
