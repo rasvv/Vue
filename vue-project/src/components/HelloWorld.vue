@@ -1,12 +1,26 @@
 <template>
+
   <div class="hello">
-    <input v-model.number.lazy="oper1" />
-    <input v-model.number.lazy="oper2" />
-    = {{ result }}
-    <br />
-    <br />
+    <h1>Калькулятор</h1>
+    <div class="inputs">
+     <div class="inputs__top">
+       <p>Операнд1</p>
+       <p>Операнд2</p>
+     </div>
+
+     <div class="inputs__bottom">
+       <input v-model.number.lazy="oper1" />
+      <input v-model.number.lazy="oper2" />
+    </div>
+    </div>
+
+    <span>
+      {{ result }}
+    </span>
+
     <input type="checkbox" id="checkbox" v-model="checked" />
     <label for="checkbox">Вывести экранную клавиатуру </label>
+    <br />
 
     <div class="numberbuttons" v-show="checked">
       <input type="radio" id="left" value="Операнд1" v-model="picked" />
@@ -14,17 +28,17 @@
 
       <input type="radio" id="right" value="Операнд2" v-model="picked" />
       <label for="right">Операнд2</label>
-      <br />
 
+      <br />
       <br />
       <button v-for="num in numbers" @click="fill(num)" :key="num">
         {{ num }}
       </button>
     </div>
     <div class="buttons">
-      <h5>Операция</h5>
-      <button v-for="opera in operators" @click="calculate(opera)" :key="opera">
-        {{ opera }}
+      <h4>Операция</h4>
+      <button v-for="(opera, id) in operators" @click="calculate(opera)" :key="opera">
+        {{ captions[id] }}
       </button>
     </div>
   </div>
@@ -38,6 +52,7 @@ export default {
     strOper: '0',
     result: 0,
     operators: ['+', '-', '/', '*', '^', '%'],
+    captions: ['Сложение', 'Вычитание', 'Деление', 'Умножение', 'Возведение в степень', 'Целая часть от деления'],
     numbers: [1, 2, 3, 4, 5, 6, 7, 8, 9, 0, '<-'],
     checked: false,
     picked: 'Операнд1'
@@ -60,7 +75,7 @@ export default {
           '^': () => Math.pow(oper1, oper2),
           '%': () => parseInt(oper1 / oper2)
         }
-        this.result = calcRes[fun]()
+        this.result = oper1 + fun + oper2 + '=' + calcRes[fun]()
       }
     },
     fill (num) {
@@ -109,11 +124,59 @@ li {
 a {
   color: #42b983;
 }
+
+.hello {
+  width: 500px;
+  margin: 0 auto;
+}
+
+.inputs {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+input {
+  text-align: center;
+  font-size: 18px;
+}
+
+span {
+  display: block;
+  font-weight: bold;
+  font-size: 24px;
+  margin: 10px;
+}
+
+.inputs__top {
+  height: 20px;
+}
+
+.inputs__bottom {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  height: 50px;
+}
+
+p {
+  display: inline-block;
+  width: 200px;
+  margin: 0;
+}
+
 button {
-  margin-right: 10px;
+  margin: 2px 10px;
+  width: 120px;
+  height: 30px;
+  font-size: 10px;
 }
 
 .buttons {
   margin-top: 15px;
+}
+
+.numberbuttons {
+  border: 1px solid #000;
+  background-color: #f5f1f1;
 }
 </style>
