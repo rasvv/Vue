@@ -1,6 +1,6 @@
 <template>
 
-  <div class="hello">
+  <div class="calculator">
     <h1>Калькулятор</h1>
     <div class="inputs">
      <div class="inputs__top">
@@ -18,19 +18,22 @@
       {{ result }}
     </span>
 
-    <input type="checkbox" id="checkbox" v-model="checked" />
-    <label for="checkbox">Вывести экранную клавиатуру </label>
+    <label for="checkbox">
+      <input type="checkbox" id="checkbox" v-model="checked" />
+      Вывести экранную клавиатуру
+      </label>
     <br />
 
     <div class="numberbuttons" v-show="checked">
-      <input type="radio" id="left" value="Операнд1" v-model="picked" />
-      <label for="left">Операнд1</label>
+      <div class="selector">
+        <h5>Поле для заполнения: </h5>
+        <input type="radio" id="left" value="Операнд1" v-model="picked" />
+        <label for="left">Операнд1</label>
 
-      <input type="radio" id="right" value="Операнд2" v-model="picked" />
-      <label for="right">Операнд2</label>
+        <input type="radio" id="right" value="Операнд2" v-model="picked" />
+        <label for="right">Операнд2</label>
+      </div>
 
-      <br />
-      <br />
       <button v-for="num in numbers" @click="fill(num)" :key="num">
         {{ num }}
       </button>
@@ -108,75 +111,6 @@ export default {
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped lang="scss">
-h3 {
-  margin: 40px 0 0;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
+<style  src="./calculator.sass" lang="sass">
 
-.hello {
-  width: 500px;
-  margin: 0 auto;
-}
-
-.inputs {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-input {
-  text-align: center;
-  font-size: 18px;
-}
-
-span {
-  display: block;
-  font-weight: bold;
-  font-size: 24px;
-  margin: 10px;
-}
-
-.inputs__top {
-  height: 20px;
-}
-
-.inputs__bottom {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-  height: 50px;
-}
-
-p {
-  display: inline-block;
-  width: 200px;
-  margin: 0;
-}
-
-button {
-  margin: 2px 10px;
-  width: 120px;
-  height: 30px;
-  font-size: 10px;
-}
-
-.buttons {
-  margin-top: 15px;
-}
-
-.numberbuttons {
-  border: 1px solid #000;
-  background-color: #f5f1f1;
-}
 </style>
