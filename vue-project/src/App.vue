@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <!-- <img alt="Vue logo" src="./assets/calculator.png" /> -->
-    <calculator msg="Welcome to Your Vue.js App" :myBool="false" />
+    <calculator />
   </div>
 </template>
 
