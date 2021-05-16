@@ -1,4 +1,8 @@
+import Paginator from './Paginator'
 export default {
+  components: {
+    Paginator
+  },
   props: {
     items: {
       type: Array,
@@ -7,9 +11,9 @@ export default {
   },
   data () {
     return {
-      size: 4,
-      pageNumber: 0,
-      currentlyPage: 1
+      paginatedData: [],
+      page: 0,
+      size: 0
     }
   },
   computed: {
@@ -17,22 +21,14 @@ export default {
       return {
         height: this.size * 25 + 30 + 'px'
       }
-    },
-    pageCount () {
-      const l = this.items.length
-      const s = this.size
-      return Math.ceil(l / s)
-    },
-    paginatedData () {
-      const start = this.pageNumber * this.size
-      const end = start + this.size
-      return this.items.slice(start, end)
     }
   },
   methods: {
-    setPage (page) {
-      this.pageNumber = page - 1
-      this.currentlyPage = page
+    onShowArr (arr) {
+      const { paginatedData, page, size } = arr
+      this.paginatedData = paginatedData
+      this.page = page
+      this.size = size
     }
   }
 }

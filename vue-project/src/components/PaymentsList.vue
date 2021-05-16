@@ -13,15 +13,7 @@
         <div class="list__data-cell price">{{ item.price }}</div>
       </div>
     </div>
-    <div class="btn-toolbar">
-      <button
-      v-for="page in pageCount"
-      v-bind:key="page"
-      v-bind:class="{ active: page === currentlyPage }"
-      @click.prevent="setPage(page)">
-        {{ page }}
-      </button>
-    </div>
+    <Paginator :items="items" @showArr="onShowArr"/>
   </div>
 </template>
 
