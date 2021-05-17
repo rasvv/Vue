@@ -1,9 +1,12 @@
 <template>
-  <div>
-    <input type="date" placeholder="Дата" v-model="date">
-    <input placeholder="Категория" v-model="category">
-    <input placeholder="Цена" v-model.number="price">
-    <button @click="save">Добавить</button>
+  <div  class="paymentsform">
+    <input type="date" class="paymentsform__date" v-model="date" >
+    <!-- <input placeholder="Категория" v-model="category"> -->
+		<select v-model="category" class="paymentsform__category">
+			<option v-for="(category, index) in categories" :key="index">{{ category }}</option>
+		</select>
+    <input placeholder="Цена" class="paymentsform__price" v-model.number="price">
+    <button class="button" @click="save">Добавить</button>
   </div>
 </template>
 
@@ -11,8 +14,15 @@
 export default {
   data () {
     return {
-      date: '',
-      category: '',
+      date: new Date().toISOString().substr(0, 10),
+      category: 'Еда',
+      categories: [
+        'Еда',
+        'Одежда',
+        'Авто',
+        'Прочее',
+        'Развлечения'
+      ],
       price: 0
     }
   },
@@ -33,5 +43,27 @@ export default {
 </script>
 
 <style lang="sass">
+$block-height: 30px
+.paymentsform
+	height: $block-height
+	margin-bottom: 20px
+	box-sizing: border-box
+
+	&__date
+		margin-right: 10px
+		height: $block-height - 4px
+    box-sizing: border-box
+	&__category
+		width: 120px
+    margin-right: 10px
+		height: 100%
+    box-sizing: border-box
+	&__price
+		margin: 0 10px
+		height: $block-height - 6px
+    box-sizing: border-box
+.button
+	height: $block-height
+	width: 80px
 
 </style>

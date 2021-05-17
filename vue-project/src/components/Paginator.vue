@@ -1,12 +1,14 @@
 <template>
   <div class="btn-toolbar">
+		<button @click.prevent="prevPage()" :disabled="currentlyPage == 1">prev</button>
     <button
-    v-for="page in pageCount"
-    v-bind:key="page"
-    v-bind:class="{ active: page === currentlyPage }"
-    @click.prevent="setPage(page)">
+      v-for="page in pageCount"
+      v-bind:key="page"
+      v-bind:class="{ active: page === currentlyPage }"
+      @click.prevent="setPage(page)">
       {{ page }}
     </button>
+		<button @click.prevent="nextPage()" :disabled="this.currentlyPage == this.pageCount">next</button>
   </div>
 </template>
 
@@ -20,7 +22,7 @@ export default {
   },
   data () {
     return {
-      size: 4,
+      size: 3,
       pageNumber: 0,
       currentlyPage: 1
     }
@@ -43,6 +45,14 @@ export default {
       this.currentlyPage = page
       const { paginatedData, size } = this
       this.$emit('showArr', { paginatedData, page, size })
+    },
+    nextPage () {
+      this.currentlyPage++
+      this.setPage(this.currentlyPage)
+    },
+    prevPage () {
+      this.currentlyPage--
+      this.setPage(this.currentlyPage)
     }
   },
   created () {
@@ -51,6 +61,10 @@ export default {
 }
 </script>
 
-<style>
+<style lang="sass">
+button:hover:disabled
+  cursor:not-allowed
 
+.active
+  background: lightblue
 </style>
