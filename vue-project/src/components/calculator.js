@@ -2,7 +2,7 @@ export default {
   data: () => ({
     oper1: 0,
     oper2: 0,
-    strOper: '0',
+    oper: '0',
     result: 0,
     operators: ['+', '-', '/', '*', '^', '%'],
     captions: ['Сложение', 'Вычитание', 'Деление', 'Умножение', 'Возведение в степень', 'Целая часть от деления'],
@@ -32,36 +32,15 @@ export default {
         this.result = oper1 + fun + oper2 + '=' + calcRes[fun]()
       }
     },
-    changeFocus (picked) {
-      if (picked === 'Операнд1') {
-        this.strOper = this.oper2.toString()
-      } else {
-        this.strOper = this.oper1.toString()
-      }
-    },
-    changeInput () {
-      const { strOper, picked } = this
-      if (picked === 'Операнд1') {
-        this.oper1 = +strOper
-      } else {
-        this.oper2 = +strOper
-      }
-    },
     fill (num) {
-      if (this.strOper === '0') {
-        this.strOper = num.toString()
-      } else {
-        this.strOper += num.toString()
-      }
-      this.changeInput()
+      const { picked } = this
+      const oper = picked === 'Операнд1' ? 'oper1' : 'oper2'
+      this[oper] = +(this[oper] += String(num))
     },
     backSpace () {
-      if (this.strOper.length === 1) {
-        this.strOper = 0
-      } else {
-        this.strOper = this.strOper.slice(0, -1)
-      }
-      this.changeInput()
+      const { picked } = this
+      const oper = picked === 'Операнд1' ? 'oper1' : 'oper2'
+      this[oper] = +(this[oper].slice(0, -1))
     }
   }
 }

@@ -41,11 +41,11 @@
         <h4>Поле для заполнения: </h4>
 
         <label>
-          <input type="radio" id="left" value="Операнд1" v-model="picked" @click="changeFocus(picked)"/>
+          <input type="radio" id="left" value="Операнд1" v-model="picked" />
           Операнд1
 				</label>
         <label>
-          <input type="radio" id="right" value="Операнд2" v-model="picked" @click="changeFocus(picked)"/>
+          <input type="radio" id="right" value="Операнд2" v-model="picked" />
 					Операнд2
 				</label>
       </div>
@@ -54,7 +54,7 @@
         <button v-for="num in numbers" @click="fill(num)" :key="num">
           {{ num }}
         </button>
-				<button v-for="back in backspace" @click="backSpace" :key="back">
+				<button class="btnback" v-for="back in backspace" @click="backSpace" :key="back">
           {{ back }}
         </button>
       </div>
