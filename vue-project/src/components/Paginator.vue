@@ -13,12 +13,10 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   props: {
-    items: {
-      type: Array,
-      default: () => []
-    }
   },
   data () {
     return {
@@ -28,15 +26,18 @@ export default {
     }
   },
   computed: {
+    ...mapGetters([
+      'getPaymentsList'
+    ]),
     pageCount () {
-      const l = this.items.length
+      const l = this.getPaymentsList.length
       const s = this.size
       return Math.ceil(l / s)
     },
     paginatedData () {
       const start = this.pageNumber * this.size
       const end = start + this.size
-      return this.items.slice(start, end)
+      return this.getPaymentsList.slice(start, end)
     }
   },
   methods: {
@@ -55,7 +56,7 @@ export default {
       this.setPage(this.currentlyPage)
     }
   },
-  created () {
+  mounted () {
     this.setPage(1)
   }
 }

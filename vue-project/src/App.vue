@@ -14,6 +14,8 @@
 <script>
 import PaymentsList from './components/PaymentsList.vue'
 import PaymentsForm from './components/PaymentsForm.vue'
+
+import { mapActions } from 'vuex'
 export default {
   name: 'App',
   components: {
@@ -22,17 +24,24 @@ export default {
   },
   data () {
     return {
-      checked: false,
-      paymentsList: []
+      checked: false
     }
   },
   methods: {
+    ...mapActions([
+      'fetchData',
+      'fetchCategoryData'
+    ]),
     onDatAdded (data) {
       this.paymentsList.push(data)
     },
     onChangeVisibleForm () {
       this.checked = !this.checked
     }
+  },
+  mounted () {
+    this.fetchData()
+    this.fetchCategoryData()
   }
 }
 </script>

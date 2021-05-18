@@ -3,7 +3,7 @@
     <input type="date" class="paymentsform__date" v-model="date" >
     <!-- <input placeholder="Категория" v-model="category"> -->
 		<select v-model="category" class="paymentsform__category">
-			<option v-for="(category, index) in categories" :key="index">{{ category }}</option>
+			<option v-for="(category, index) in getCategoryList" :key="index">{{ category }}</option>
 		</select>
     <input placeholder="Цена" class="paymentsform__price" v-model.number="price">
     <button class="button" @click="save">Добавить</button>
@@ -11,26 +11,20 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 export default {
   data () {
     return {
       date: new Date().toISOString().substr(0, 10),
       category: 'Еда',
-      categories: [
-        'Еда',
-        'Одежда',
-        'Авто',
-        'Прочее',
-        'Развлечения'
-      ],
+      categories: [],
       price: 0
     }
   },
-  props: {
-    items: {
-      type: Array,
-      default: () => []
-    }
+  computed: {
+    ...mapGetters([
+      'getCategoryList'
+    ])
   },
   methods: {
     save () {
@@ -38,6 +32,9 @@ export default {
       // date = date
       this.$emit('add', { date, category, price })
     }
+  },
+  mounted () {
+    this.categories.push(this.getCategoryList)
   }
 }
 </script>
