@@ -40,7 +40,7 @@ export default {
     backSpace () {
       const { picked } = this
       const oper = picked === 'Операнд1' ? 'oper1' : 'oper2'
-      this[oper] = +(this[oper].slice(0, -1))
+      this[oper] = Math.trunc(this[oper] / 10)
     }
   }
 }
