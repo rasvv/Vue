@@ -12,10 +12,10 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 import PaymentsList from './components/PaymentsList.vue'
 import PaymentsForm from './components/PaymentsForm.vue'
 
-import { mapActions } from 'vuex'
 export default {
   name: 'App',
   components: {
@@ -39,7 +39,7 @@ export default {
       this.checked = !this.checked
     }
   },
-  mounted () {
+  created () {
     this.fetchData()
     this.fetchCategoryData()
   }
