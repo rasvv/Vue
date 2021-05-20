@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" class="app">
     <header :class="[$style.header]">
       Мой подсчет расходов
     </header>
@@ -47,6 +47,10 @@ export default {
 </script>
 
 <style lang="sass" module>
+body
+	width: 800px
+	margin: 0 auto
+
 .header
   color: red
   font-size: 24px

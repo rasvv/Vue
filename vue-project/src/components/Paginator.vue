@@ -36,8 +36,6 @@ export default {
       return Math.ceil(l / s)
     },
     paginatedData () {
-      // let{ pageNumber, size } = this
-      // return this.getPaymentsList.slice(start, end)
       this.fetchData([this.pageNumber, this.size])
       return this.getPaginatedPaymentsList
     }

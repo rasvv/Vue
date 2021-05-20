@@ -40,7 +40,27 @@ export default new Vuex.Store({
   actions: {
     // paginateData ({ commit }, size) { },
     addFullData ({ commit }, rec) {
-      return commit('setFullPaymentsListData', this.state.fullPaymentsList.concat(rec))
+      let haveData = false
+      this.state.fullPaymentsList.forEach((item) => {
+        if (item.date === rec[0].date &&
+        item.category === rec[0].category &&
+        item.description === rec[0].description &&
+        item.price === rec[0].price) {
+          haveData = true
+        }
+      })
+      if (!haveData) {
+        return commit('setFullPaymentsListData', this.state.fullPaymentsList.concat(rec))
+      }
+    },
+    addCategoryData ({ commit }, rec) {
+      let havecategory = false
+      this.state.categoryList.forEach((item) => {
+        if (item === rec) { havecategory = true }
+      })
+      if (!havecategory) {
+        return commit('setCategoryListData', this.state.categoryList.concat(rec))
+      }
     },
     fetchFullData ({ commit }) {
       return commit('setFullPaymentsListData',
@@ -63,9 +83,7 @@ export default new Vuex.Store({
 
       return commit('setPaginatedPaymentsListData', this.state.fullPaymentsList.slice(pageNumber * size, pageNumber * size + size))
     },
-    addCategoryData ({ commit }, rec) {
-      return commit('setCategoryListData', this.state.categoryList.concat(rec))
-    },
+
     fetchCategoryData ({ commit }) {
       return commit('setCategoryListData',
         [

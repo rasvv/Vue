@@ -12,7 +12,7 @@
     <button @click="onChangeVisibleForm">Форма Добавления категории</button>
     <div class="newcategory" v-show="showcategory">
       <input placeholder="Новая категория" class="paymentsform__category" v-model="newcategory">
-      <button class="newcategorybutton" @click="addcategory">Добавить категорию</button>
+      <button class="newcategorybutton button" @click="addcategory">Добавить категорию</button>
     </div>
   </div>
 </template>
@@ -44,19 +44,24 @@ export default {
     ]),
     save () {
       const { date, category, description, price } = this
-      this.addFullData([{ date, category, description, price }])
-      this.categories.push(this.getCategoryList)
+      const rec = [{ date, category, description, price }]
+      this.addFullData(rec)
+      this.fetchFullData()
+      // this.categories.push(this.getCategoryList)
     },
     addcategory () {
       this.addCategoryData(this.newcategory)
-      this.categories = this.getCategoryList
+      this.onGetCategory()
     },
     onChangeVisibleForm () {
       this.showcategory = !this.showcategory
+    },
+    onGetCategory () {
+      this.categories = this.getCategoryList
     }
   },
   mounted () {
-    this.categories = this.getCategoryList
+    this.onGetCategory()
   }
 }
 </script>
@@ -64,28 +69,30 @@ export default {
 <style lang="sass">
 $block-height: 30px
 .paymentsform
+  padding: 15px
   // height: $block-height
   margin-bottom: 15px
   // box-sizing: border-box
+  border: 1px solid #000
 
   &__date
     margin-right: 10px
-    height: $block-height - 4px
+    height: $block-height
     box-sizing: border-box
   &__category
     width: 120px
     margin-right: 10px
-    height: 100%
+    height: $block-height
     box-sizing: border-box
   &__description
     width: 250px
     margin-left: 10px
-    height: $block-height - 6px
+    height: $block-height
     box-sizing: border-box
   &__price
     width: 70px
     margin: 0 10px
-    height: $block-height - 6px
+    height: $block-height
     box-sizing: border-box
 .button
   height: $block-height
