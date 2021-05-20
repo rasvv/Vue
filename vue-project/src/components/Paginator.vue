@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
   props: {
@@ -27,20 +27,26 @@ export default {
   },
   computed: {
     ...mapGetters([
-      'getPaymentsList'
+      'getFullPaymentsList',
+      'getPaginatedPaymentsList'
     ]),
     pageCount () {
-      const l = this.getPaymentsList.length
+      const l = this.getFullPaymentsList.length
       const s = this.size
       return Math.ceil(l / s)
     },
     paginatedData () {
-      const start = this.pageNumber * this.size
-      const end = start + this.size
-      return this.getPaymentsList.slice(start, end)
+      // let{ pageNumber, size } = this
+      // return this.getPaymentsList.slice(start, end)
+      this.fetchData([this.pageNumber, this.size])
+      return this.getPaginatedPaymentsList
     }
   },
   methods: {
+    ...mapActions([
+      'fetchData',
+      'fetchCategoryData'
+    ]),
     setPage (page) {
       this.pageNumber = page - 1
       this.currentlyPage = page

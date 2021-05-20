@@ -4,7 +4,7 @@
       Мой подсчет расходов
     </header>
     <main>
-      <button @click="onChangeVisibleForm">Добавить данные</button>
+      <button @click="onChangeVisibleForm">Форма добавления данных</button>
       <PaymentsForm @add="onDatAdded" v-show="checked"/>
       <PaymentsList :items="paymentsList"/>
     </main>
@@ -29,7 +29,7 @@ export default {
   },
   methods: {
     ...mapActions([
-      'fetchData',
+      'fetchFullData',
       'fetchCategoryData'
     ]),
     onDatAdded (data) {
@@ -40,7 +40,7 @@ export default {
     }
   },
   created () {
-    this.fetchData()
+    this.fetchFullData()
     this.fetchCategoryData()
   }
 }

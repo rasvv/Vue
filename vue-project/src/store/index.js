@@ -13,19 +13,19 @@ export default new Vuex.Store({
   },
   state: {
     paymentsList: [],
-    fullpaymentsList: [],
-    paginatedpaymentsList: [],
+    fullPaymentsList: [],
+    paginatedPaymentsList: [],
     categoryList: []
   },
   mutations: {
     setPaymentsListData (state, payload) {
       state.paymentsList = payload
     },
-    setPaginatePaymentsListData (state, payload) {
-      state.paginatedpaymentsList = payload
+    setPaginatedPaymentsListData (state, payload) {
+      state.paginatedPaymentsList = payload
     },
     setFullPaymentsListData (state, payload) {
-      state.fullpaymentsList = payload
+      state.fullPaymentsList = payload
     },
     setCategoryListData (state, payload) {
       state.categoryList = payload
@@ -33,34 +33,14 @@ export default new Vuex.Store({
   },
   getters: {
     getPaymentsList: state => state.paymentsList,
+    getFullPaymentsList: state => state.fullPaymentsList,
+    getPaginatedPaymentsList: state => state.paginatedPaymentsList,
     getCategoryList: state => state.categoryList
   },
   actions: {
-    paginateData ({ commit }, size) {
-      return commit('setPaginatePaymentsListData', () => {
-				const count = Math.ceil(this.fullpaymentsList.length / size) + 1
-				for (let i = 1; i <= count; i++) {
-					for (let k = 1; k <= size; k++) {
-						let tempArr = []
-						tempArr.push(`"page {{ count }}": [`) 
-						let tek = k * (i - 1)
-						tempArr.push(
-							{
-								"id": tek,
-								"date": this.fullpaymentsList(tek).date,
-								"category": this.fullpaymentsList(tek).category,
-								"description": this.fullpaymentsList(tek).description,
-								"price": this.fullpaymentsList(tek).price
-							}
-						)
-
-						tempArr.push(`]`, ) 						
-					}
-
-				} 
-				this.fullpaymentsList.fo
-			}
-        )
+    // paginateData ({ commit }, size) { },
+    addFullData ({ commit }, rec) {
+      return commit('setFullPaymentsListData', this.state.fullPaymentsList.concat(rec))
     },
     fetchFullData ({ commit }) {
       return commit('setFullPaymentsListData',
@@ -76,6 +56,15 @@ export default new Vuex.Store({
           { date: '2021-05-11', category: 'Развлечения', description: 'Сходил в кино', price: 600 },
           { date: '2021-05-12', category: 'Прочее', description: 'Проезд', price: 49 }
         ])
+    },
+    fetchData ({ commit }, attr) {
+      const pageNumber = attr[0]
+      const size = attr[1]
+
+      return commit('setPaginatedPaymentsListData', this.state.fullPaymentsList.slice(pageNumber * size, pageNumber * size + size))
+    },
+    addCategoryData ({ commit }, rec) {
+      return commit('setCategoryListData', this.state.categoryList.concat(rec))
     },
     fetchCategoryData ({ commit }) {
       return commit('setCategoryListData',
