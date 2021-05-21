@@ -8,7 +8,7 @@
         <div class="list__header-cell price">Цена</div>
       </div>
 
-      <div class="list__data" v-for="(item, index) in paginatedData" :key="index" >
+      <div class="list__data" v-for="(item, index) in currentElements" :key="index" >
       <!-- <div class="list__data" v-for="(item, index) in getPaymentsList" :key="index" > -->
         <div class="list__data-cell date">{{ item.date }}</div>
         <div class="list__data-cell category">{{ item.category }}</div>
@@ -16,22 +16,27 @@
         <div class="list__data-cell price">{{ item.price }}</div>
       </div>
     </div>
-    <Paginator :items="items" @showArr="onShowArr"/>
+    <Paginator
+      :length = "getFullPaymentsList.length"
+      :size = "size"
+      :currentlyPage = "page"
+      @paginate = "onPaginate"
+    />
   </div>
 </template>
 
 <script>
 import Paginator from './Paginator'
-// import { mapGetters } from 'vuex'
+import { mapGetters } from 'vuex'
+
 export default {
   components: {
     Paginator
   },
   data () {
     return {
-      paginatedData: [],
-      page: 0,
-      size: 0
+      page: 1,
+      size: 4
     }
   },
   computed: {
@@ -39,15 +44,18 @@ export default {
       return {
         height: (this.size + 1) * 25 + 'px'
       }
+    },
+    ...mapGetters([
+      'getFullPaymentsList'
+    ]),
+    currentElements () {
+      const { page, size } = this
+      return this.getFullPaymentsList.slice(size * (page - 1), size * (page - 1) + size)
     }
   },
   methods: {
-
-    onShowArr (arr) {
-      const { paginatedData, page, size } = arr
-      this.paginatedData = paginatedData
+    onPaginate (page) {
       this.page = page
-      this.size = size
     }
   }
 }

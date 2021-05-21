@@ -1,14 +1,14 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
-import Json from './data.json'
+// import Json from './data.json'
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   data () {
     return {
-      myJson: Json
+      // myJson: Json
     }
   },
   state: {

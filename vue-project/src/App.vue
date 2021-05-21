@@ -1,7 +1,7 @@
 <template>
   <div id="app" class="app">
     <header :class="[$style.header]">
-      Мой подсчет расходов
+      Подсчет расходов
     </header>
     <main>
       <button @click="onChangeVisibleForm">Форма добавления данных</button>
