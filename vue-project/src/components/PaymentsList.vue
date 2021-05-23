@@ -57,6 +57,9 @@ export default {
     onPaginate (page) {
       this.page = page
     }
+  },
+  mounted () {
+
   }
 }
 </script>

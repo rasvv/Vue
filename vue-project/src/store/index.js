@@ -95,5 +95,8 @@ export default new Vuex.Store({
         ]
       )
     }
+  },
+  methods: {
+
   }
 })

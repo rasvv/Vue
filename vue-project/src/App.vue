@@ -1,52 +1,34 @@
 <template>
   <div id="app" class="app">
-    <header :class="[$style.header]">
+    <header class="header">
+      <router-link to="/dashboard">Dashboard</router-link>
+      <router-link to="/about">About</router-link>
+      <router-link to="/404">404</router-link>
+      <br>
       Подсчет расходов
     </header>
     <main>
-      <button @click="onChangeVisibleForm">Форма добавления данных</button>
-      <PaymentsForm @add="onDatAdded" v-show="checked"/>
-      <PaymentsList :items="paymentsList"/>
+      <router-view />
     </main>
   </div>
 </template>
 
 <script>
-import { mapActions } from 'vuex'
-import PaymentsList from './components/PaymentsList.vue'
-import PaymentsForm from './components/PaymentsForm.vue'
 
 export default {
   name: 'App',
-  components: {
-    PaymentsList,
-    PaymentsForm
-  },
   data () {
     return {
-      checked: false
+
     }
   },
   methods: {
-    ...mapActions([
-      'fetchFullData',
-      'fetchCategoryData'
-    ]),
-    onDatAdded (data) {
-      this.paymentsList.push(data)
-    },
-    onChangeVisibleForm () {
-      this.checked = !this.checked
-    }
-  },
-  created () {
-    this.fetchFullData()
-    this.fetchCategoryData()
+
   }
 }
 </script>
 
-<style lang="sass" module>
+<style lang="sass">
 body
 	width: 800px
 	margin: 0 auto

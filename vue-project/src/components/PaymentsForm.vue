@@ -28,7 +28,8 @@ export default {
       description: '',
       categories: [],
       price: 0,
-      showcategory: false
+      showcategory: false,
+      address: ''
     }
   },
   computed: {
@@ -58,10 +59,45 @@ export default {
     },
     onGetCategory () {
       this.categories = this.getCategoryList
+    },
+    setValues (category, price) {
+      this.category = category
+      this.price = price
+    },
+    checkCategory () {
+      let havecategory = false
+      this.state.categoryList.forEach((item) => {
+        if (item === this.$route.params.category) { havecategory = true }
+      })
+      return havecategory
+    },
+    parseAddress () {
+      const endCategory = this.$route.params.address.indexOf('?')
+      const startPrice = this.$route.params.address.indexOf('=')
+
+      if (endCategory > -1) {
+        this.category = this.$route.params.address.slice(0, endCategory)
+      } else {
+        this.category = this.$route.params.address.slice(0)
+      }
+
+      // if (startPrice > -1) {
+      //   this.price = this.$route.params.value
+      // } else {
+      //   this.price = 0
+      // }
+      this.price = this.$route.params.value
+
+      // this.$route.params.address
     }
   },
   mounted () {
     this.onGetCategory()
+    this.parseAddress()
+    if (this.checkCategory && this.price !== 0) {
+      // this.setValues(this.$route.params.category, this.$route.params.price)
+      this.save()
+    }
   }
 }
 </script>
