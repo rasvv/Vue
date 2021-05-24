@@ -1,6 +1,6 @@
 <template>
 <div class="main">
-  <div>Dashboard</div>
+  <!-- <div>Dashboard</div> -->
   <button @click="onChangeVisibleForm">Форма добавления данных</button>
   <PaymentsForm v-show="checked"/>
   <PaymentsList :items="paymentsList"/>

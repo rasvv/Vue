@@ -15,7 +15,7 @@ const router = new Router({
       component: PageDashboard
     },
     {
-      path: '/dashboard/:command/:target/:address',
+      path: '/dashboard/:command/:target/:category',
       name: 'dashboard',
       component: PageDashboard
     },

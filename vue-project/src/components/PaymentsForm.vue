@@ -29,7 +29,8 @@ export default {
       categories: [],
       price: 0,
       showcategory: false,
-      address: ''
+      address: '',
+      haveCategory: false
     }
   },
   computed: {
@@ -47,8 +48,6 @@ export default {
       const { date, category, description, price } = this
       const rec = [{ date, category, description, price }]
       this.addFullData(rec)
-      this.fetchFullData()
-      // this.categories.push(this.getCategoryList)
     },
     addcategory () {
       this.addCategoryData(this.newcategory)
@@ -65,37 +64,26 @@ export default {
       this.price = price
     },
     checkCategory () {
-      let havecategory = false
-      this.state.categoryList.forEach((item) => {
-        if (item === this.$route.params.category) { havecategory = true }
+      this.haveCategory = false
+      this.categories.forEach((item) => {
+        if (item === this.category) { this.haveCategory = true }
       })
-      return havecategory
+      // return haveCategory
     },
     parseAddress () {
-      const endCategory = this.$route.params.address.indexOf('?')
-      const startPrice = this.$route.params.address.indexOf('=')
-
-      if (endCategory > -1) {
-        this.category = this.$route.params.address.slice(0, endCategory)
-      } else {
-        this.category = this.$route.params.address.slice(0)
-      }
-
-      // if (startPrice > -1) {
-      //   this.price = this.$route.params.value
-      // } else {
-      //   this.price = 0
-      // }
-      this.price = this.$route.params.value
-
-      // this.$route.params.address
+      this.category = this.$route.params.category
+      this.price = this.$route.query.value
     }
   },
   mounted () {
     this.onGetCategory()
     this.parseAddress()
-    if (this.checkCategory && this.price !== 0) {
-      // this.setValues(this.$route.params.category, this.$route.params.price)
+    this.checkCategory()
+    if (!this.haveCategory) {
+      this.showcategory = true
+      this.newcategory = this.category
+    }
+    if (this.haveCategory && this.price > 0) {
       this.save()
     }
   }
