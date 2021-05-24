@@ -55,6 +55,8 @@ export default {
   methods: {
     onPaginate (page) {
       this.page = page
+      // this.$router.replace() .page = this.page
+      this.$route.params.page = this.page
     }
   },
   mounted () {

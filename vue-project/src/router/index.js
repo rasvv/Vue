@@ -10,12 +10,21 @@ const router = new Router({
   mode: 'history',
   routes: [
     {
+      path: '/',
+      redirect: '/dashboard'
+    },
+    {
       path: '/dashboard',
       name: 'dashboard',
       component: PageDashboard
     },
     {
-      path: '/dashboard/:command/:target/:category',
+      path: '/dashboard/:page',
+      name: 'dashboard',
+      component: PageDashboard
+    },
+    {
+      path: '/:command/:target/:category',
       name: 'dashboard',
       component: PageDashboard
     },

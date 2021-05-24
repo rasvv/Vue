@@ -36,6 +36,11 @@ export default {
       // this.currentlyPage = page
       this.$emit('paginate', page)
     }
+  },
+  mounted () {
+    if (!isNaN(this.$route.params.page)) {
+      this.setPage(+this.$route.params.page)
+    }
   }
 }
 </script>
