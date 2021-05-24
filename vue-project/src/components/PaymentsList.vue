@@ -9,7 +9,6 @@
       </div>
 
       <div class="list__data" v-for="(item, index) in currentElements" :key="index" >
-      <!-- <div class="list__data" v-for="(item, index) in getPaymentsList" :key="index" > -->
         <div class="list__data-cell date">{{ item.date }}</div>
         <div class="list__data-cell category">{{ item.category }}</div>
         <div class="list__data-cell description">{{ item.description }}</div>

@@ -40,7 +40,6 @@ export default {
     if (this.$route.params.command === 'add' &&
       this.$route.params.target === 'payment'
     ) {
-      // PaymentsForm.setValues(this.$route.params.category, this.$route.params.price)
       this.checked = true
     }
   },
