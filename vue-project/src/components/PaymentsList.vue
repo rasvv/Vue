@@ -21,6 +21,8 @@
       :currentlyPage = "page"
       @paginate = "onPaginate"
     />
+    <button @click="openPaymentsForm">Open</button>
+    <button @click="closePaymentsForm">Close</button>
   </div>
 </template>
 
@@ -57,7 +59,14 @@ export default {
       this.page = page
       // this.$router.replace() .page = this.page
       this.$route.params.page = this.page
+    },
+    openPaymentsForm () {
+      this.$modal.open('PaymentsForm')
+    },
+    closePaymentsForm () {
+      this.$modal.close('PaymentsForm')
     }
+
   },
   mounted () {
 

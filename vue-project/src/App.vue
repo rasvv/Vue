@@ -9,6 +9,13 @@
     </header>
     <main>
       <router-view />
+      <transition  name='fade'>
+        <ModalWindow
+          v-if='modalWindow'
+          :modalWindow='modalWindow'
+          :modalWindowSettings='modalWindowSettings'
+        />
+      </transition>
     </main>
   </div>
 </template>
@@ -17,19 +24,40 @@
 
 export default {
   name: 'App',
+  components: {
+    modalWindow: () => import('./components/ModalWindow.vue')
+  },
   data () {
     return {
+      modalWindow: '',
+      modalWindowSettings: {}
     }
   },
   methods: {
+    onOpened (settings) {
+      this.modalWindow = settings.name
+      this.modalWindowSettings = settings
+    },
+    onClosed () {
+      this.modalWindow = ''
+      this.modalWindowSettings = {}
+    }
+  },
+  mounted () {
+    this.$modal.EventBus.$on('open', this.onOpened)
+    this.$modal.EventBus.$on('close', this.onClosed)
+  },
+  beforeDestroy () {
+    this.$modal.EventBus.$off('open', this.onOpened)
+    this.$modal.EventBus.$off('close', this.onClosed)
   }
 }
 </script>
 
 <style lang="sass">
 body
-	width: 800px
-	margin: 0 auto
+  width: 800px
+  margin: 0 auto
 
 .header
   color: red
