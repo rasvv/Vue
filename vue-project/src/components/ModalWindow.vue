@@ -4,6 +4,7 @@
     <div :class="[$style.content]">
       <header>{{ name }}</header>
       <PaymentsForm v-if="name === 'PaymentsForm'" />
+      <CategoryForm v-if="name === 'CategoryForm'" />
     </div>
     <div :class="[$style.footer]">
       <button @click='onClose()'>Close</button>
@@ -13,10 +14,12 @@
 
 <script>
 import PaymentsForm from './PaymentsForm'
+import CategoryForm from './CategoryForm'
 
 export default {
   components: {
-    PaymentsForm
+    PaymentsForm,
+    CategoryForm
   },
   props: {
     name: String
@@ -34,21 +37,25 @@ export default {
 .wrapper
   border: 1px solid red
   position: absolute
-  width: 1180px
-  height: 100vh
+  z-index: 2
+  width: 100%
+  height: 100%
 
-  .overlay
-    z-index: 0
-    position: absolute
-    top: 0
-    left: 0
-    right: 0
-    bottom: 0
-    background: rgba(50,50,50,0.5)
+.overlay
+  z-index: 0
+  position: absolute
+  opacity: 0
+  top: 0
+  left: 0
+  right: 0
+  bottom: 0
 
-  .content
-    position: relative
-    z-index: 100
+  // background: rgba(50,50,50,0.2)
+  background: #eee
+
+.content
+  position: relative
+  z-index: 100
 
   .footer
     position: relative

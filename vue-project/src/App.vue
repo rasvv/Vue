@@ -1,11 +1,11 @@
 <template>
-  <div id="app" class="app">
-    <header class="header">
-      <router-link to="/dashboard">Dashboard</router-link>
-      <router-link to="/about">About</router-link>
-      <router-link to="/404">404</router-link>
+  <div id="app" :class="[$style.app]">
+    <header :class="[$style.header]">
+      <router-link :class="[$style.link]" to="/dashboard">Dashboard</router-link>
+      <router-link :class="[$style.link]" to="/about">About</router-link>
+      <router-link :class="[$style.link]" to="/404">404</router-link>
       <br>
-      Подсчет расходов
+      <h2>Подсчет расходов</h2>
     </header>
     <main>
       <router-view />
@@ -54,21 +54,21 @@ export default {
 }
 </script>
 
+<style  lang="sass">
+.fade-enter-active
+  transition: opacity 1s
+
+.fade-leave-active
+  transition: opacity 1s
+
+.fade-enter, .fade-leave-to
+  opacity: 0
+
+</style>
+
 <style lang="sass" module>
 main
-  // position: relative
-  // :global(.fade-enter-active),
-  // :global(.fade-leave-active)
-  //   transition: opacity 1s
-
-  // :global(.fade-enter), :global(.fade-leave-to)
-  //   opacity: 0
-
-  .fade-enter-active, .fade-leave-active
-    transition: opacity 1s
-
-  .fade-enter, .fade-leave-to
-    opacity: 0
+  position: relative
 
 body
   width: 800px
@@ -80,5 +80,9 @@ body
 
 button
   margin: 10px 0
+
+a
+	margin: 15px
+	font-size: 14px
 
 </style>

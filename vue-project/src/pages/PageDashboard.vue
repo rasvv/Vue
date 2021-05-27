@@ -1,7 +1,7 @@
 <template>
 <div class="main">
   <!-- <div>Dashboard</div> -->
-  <button @click="onChangeVisibleForm">Форма добавления данных</button>
+  <!-- <button @click="onChangeVisibleForm">Форма добавления данных</button> -->
   <PaymentsForm v-show="checked"/>
   <PaymentsList :items="paymentsList"/>
 </div>
@@ -26,9 +26,6 @@ export default {
       'fetchFullData',
       'fetchCategoryData'
     ]),
-    onChangeVisibleForm () {
-      // this.checked = !this.checked
-    },
     checkHash (category, price) {
       if (category !== '' && price !== '') {
         this.checked = true

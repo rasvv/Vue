@@ -1,14 +1,8 @@
 <template>
-  <div  class="paymentsform">
-    <input type="date" class="paymentsform__date" v-model="date" >
-    <!-- <input placeholder="Категория" v-model="category"> -->
-    <select v-model="category" class="paymentsform__category">
-      <option v-for="(category, index) in getCategoryList" :key="index">{{ category }}</option>
-    </select>
-    <input placeholder="Описание" class="paymentsform__description" v-model="description">
-    <input placeholder="Цена" class="paymentsform__price" v-model.number="price">
-    <button class="button" @click="save">Добавить</button>
-  </div>
+    <div class="newcategory" v-show="showcategory">
+      <input placeholder="Новая категория" class="newcategory__category" v-model="newcategory">
+      <button class="newcategorybutton button" @click="addcategory">Добавить категорию</button>
+    </div>
 </template>
 
 <script>
@@ -85,36 +79,8 @@ export default {
 </script>
 
 <style lang="sass">
-$block-height: 30px
-.paymentsform
-  padding: 15px
-  // height: $block-height
-  margin-bottom: 15px
-  // box-sizing: border-box
-  border: 1px solid #000
-  background: #fff
 
-  &__date
-    margin-right: 10px
-    height: $block-height
-    box-sizing: border-box
-  &__category
-    width: 120px
-    margin-right: 10px
-    height: $block-height
-    box-sizing: border-box
-  &__description
-    width: 250px
-    margin-left: 10px
-    height: $block-height
-    box-sizing: border-box
-  &__price
-    width: 70px
-    margin: 0 10px
-    height: $block-height
-    box-sizing: border-box
-.button
-  height: $block-height
-  width: 80px
+.newcategorybutton
+  width: 150px
 
 </style>

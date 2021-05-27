@@ -23,6 +23,8 @@
     />
     <button @click="openPaymentsForm">Open</button>
     <button @click="closePaymentsForm">Close</button>
+    <button @click="openCategoryForm">Open</button>
+    <button @click="closeCategoryForm">Close</button>
   </div>
 </template>
 
@@ -43,7 +45,7 @@ export default {
   computed: {
     style () {
       return {
-        height: (this.size + 1) * 25 + 'px'
+        height: (this.size + 1) * 30 + 'px'
       }
     },
     ...mapGetters([
@@ -65,8 +67,13 @@ export default {
     },
     closePaymentsForm () {
       this.$modal.close('PaymentsForm')
+    },
+    openCategoryForm () {
+      this.$modal.open('CategoryForm')
+    },
+    closeCategoryForm () {
+      this.$modal.close('CategoryForm')
     }
-
   },
   mounted () {
 
@@ -75,6 +82,8 @@ export default {
 </script>
 
 <style lang='sass'>
+$fontsize: 16px
+// $blockwidth:
 .list
   margin: 10px 0
 
@@ -86,6 +95,7 @@ export default {
       border: 1px solid black
       padding: 2px
       background-color: #eee
+      font-size: $fontsize
 
   &__data
     display: flex
@@ -93,15 +103,16 @@ export default {
     &-cell
       border: 1px solid black
       padding: 2px
+      font-size: $fontsize
 
 .index
-  width: 50px
+  width: $fontsize * 4
 .date
-  width: 100px
+  width: $fontsize * 8
 .category
-  width: 100px
+  width: $fontsize * 8
 .description
-  width: 250px
+  width: $fontsize * 30
 .price
-  width: 80px
+  width: $fontsize * 8
 </style>
