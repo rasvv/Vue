@@ -12,8 +12,7 @@
       <transition  name='fade'>
         <ModalWindow
           v-if='modalWindow'
-          :modalWindow='modalWindow'
-          :modalWindowSettings='modalWindowSettings'
+          :name='modalWindow'
         />
       </transition>
     </main>
@@ -25,22 +24,23 @@
 export default {
   name: 'App',
   components: {
-    modalWindow: () => import('./components/ModalWindow.vue')
+    ModalWindow: () => import('./components/ModalWindow')
   },
   data () {
     return {
-      modalWindow: '',
-      modalWindowSettings: {}
+      // modalShow: false,
+      modalWindow: false
+      // modalWindowSettings: {}
     }
   },
   methods: {
-    onOpened (settings) {
-      this.modalWindow = settings.name
-      this.modalWindowSettings = settings
+    onOpened ({ name }) {
+      this.modalWindow = name
+      // this.modalWindowSettings = settings
     },
     onClosed () {
       this.modalWindow = ''
-      this.modalWindowSettings = {}
+      // this.modalWindowSettings = {}
     }
   },
   mounted () {
@@ -54,7 +54,22 @@ export default {
 }
 </script>
 
-<style lang="sass">
+<style lang="sass" module>
+main
+  // position: relative
+  // :global(.fade-enter-active),
+  // :global(.fade-leave-active)
+  //   transition: opacity 1s
+
+  // :global(.fade-enter), :global(.fade-leave-to)
+  //   opacity: 0
+
+  .fade-enter-active, .fade-leave-active
+    transition: opacity 1s
+
+  .fade-enter, .fade-leave-to
+    opacity: 0
+
 body
   width: 800px
   margin: 0 auto
@@ -65,4 +80,5 @@ body
 
 button
   margin: 10px 0
+
 </style>

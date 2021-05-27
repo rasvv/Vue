@@ -10,16 +10,15 @@
 <script>
 import { mapActions } from 'vuex'
 import PaymentsList from '../components/PaymentsList'
-import PaymentsForm from '../components/PaymentsForm'
+// import PaymentsForm from '../components/PaymentsForm'
 
 export default {
   components: {
-    PaymentsList,
-    PaymentsForm
+    PaymentsList
   },
   data () {
     return {
-      checked: false
+      // checked: false
     }
   },
   methods: {
@@ -28,7 +27,7 @@ export default {
       'fetchCategoryData'
     ]),
     onChangeVisibleForm () {
-      this.checked = !this.checked
+      // this.checked = !this.checked
     },
     checkHash (category, price) {
       if (category !== '' && price !== '') {
@@ -50,6 +49,8 @@ export default {
 }
 </script>
 
-<style>
+<style lang="sass">
+.main
+  position: absolute
 
 </style>
