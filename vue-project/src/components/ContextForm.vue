@@ -1,29 +1,21 @@
 <template>
-    <div class="newcategory" v-show="showcategory">
-      <input placeholder="Новая категория" class="newcategory__category" v-model="newcategory">
-      <button class="newcategorybutton button" @click="addcategory">Добавить категорию</button>
+    <div class="context">
+			<div class="context__item context__edit" @click="editcontext">Редактировать</div>
+			<div class="context__item context__delete" @click="deletecontext">Удалить</div>
     </div>
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex'
 export default {
   data () {
     return {
-      showcategory: false,
-      address: '',
-      haveCategory: false
+      showcontext: false
     }
   },
   computed: {
-    ...mapGetters([
-      'getCategoryList'
-    ])
+
   },
   methods: {
-    ...mapActions([
-      'addCategoryData'
-    ]),
     save () {
       const { date, category, description, price } = this
       const rec = [{ date, category, description, price }]

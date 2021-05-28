@@ -6,6 +6,7 @@
         <div class="list__header-cell category">Категория</div>
         <div class="list__header-cell description">Описание</div>
         <div class="list__header-cell price">Цена</div>
+        <div class="list__header-cell context"></div>
       </div>
 
       <div class="list__data" v-for="(item, index) in currentElements" :key="index" >
@@ -13,6 +14,7 @@
         <div class="list__data-cell category">{{ item.category }}</div>
         <div class="list__data-cell description">{{ item.description }}</div>
         <div class="list__data-cell price">{{ item.price }}</div>
+        <div class="list__data-cell context" @click="openContextMenu">...</div>
       </div>
     </div>
     <Paginator
@@ -25,6 +27,8 @@
     <button @click="closePaymentsForm">Close</button>
     <button @click="openCategoryForm">Open</button>
     <button @click="closeCategoryForm">Close</button>
+    <button @click="openContextMenu">Open</button>
+    <button @click="closeContextMenu">Close</button>
   </div>
 </template>
 
@@ -73,6 +77,12 @@ export default {
     },
     closeCategoryForm () {
       this.$modal.close('CategoryForm')
+    },
+    openContextMenu () {
+      this.$modal.open('ContextForm')
+    },
+    closeContextMenu () {
+      this.$modal.close('ContextForm')
     }
   },
   mounted () {
@@ -115,4 +125,6 @@ $fontsize: 16px
   width: $fontsize * 30
 .price
   width: $fontsize * 8
+.context
+  width: $fontsize
 </style>

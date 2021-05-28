@@ -5,6 +5,7 @@
       <header>{{ name }}</header>
       <PaymentsForm v-if="name === 'PaymentsForm'" />
       <CategoryForm v-if="name === 'CategoryForm'" />
+      <ContextForm v-if="name === 'ContextForm'" />
     </div>
     <div :class="[$style.footer]">
       <button @click='onClose()'>Close</button>
@@ -15,11 +16,13 @@
 <script>
 import PaymentsForm from './PaymentsForm'
 import CategoryForm from './CategoryForm'
+import ContextForm from './ContextForm'
 
 export default {
   components: {
     PaymentsForm,
-    CategoryForm
+    CategoryForm,
+    ContextForm
   },
   props: {
     name: String
