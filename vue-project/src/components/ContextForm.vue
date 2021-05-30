@@ -1,11 +1,13 @@
 <template>
-    <div class="context">
-			<div class="context__item context__edit" @click="editcontext">Редактировать</div>
-			<div class="context__item context__delete" @click="deletecontext">Удалить</div>
+    <div :class="[$style.context]" >
+			<button :class="[$style.context__item, $style.context__edit]" @click="addcontext">Добавить запись</button>
+			<button :class="[$style.context__item, $style.context__edit]" @click="editcontext">Редактировать</button>
+			<button :class="[$style.context__item, $style.context__delete]" @click="deletecontext">Удалить</button>
     </div>
-</template>
+</template>burron
 
 <script>
+import { mapActions } from 'vuex'
 export default {
   data () {
     return {
@@ -16,55 +18,40 @@ export default {
 
   },
   methods: {
-    save () {
-      const { date, category, description, price } = this
-      const rec = [{ date, category, description, price }]
-      this.addFullData(rec)
+    ...mapActions([
+      'deleteRecord',
+      'editRecord',
+      'clearCurrentRecord'
+    ]),
+    addcontext () {
+      this.clearCurrentRecord()
+      this.$modal.close('ContextForm')
+      this.$modal.open('PaymentsForm')
     },
-    addcategory () {
-      this.addCategoryData(this.newcategory)
-      this.onGetCategory()
+    editcontext () {
+      // this.editRecord()
+      this.$modal.close('ContextForm')
+      this.$modal.open('PaymentsForm')
+      // this.clearCurrentRecord()
     },
-    onChangeVisibleForm () {
-      this.showcategory = !this.showcategory
-    },
-    onGetCategory () {
-      this.categories = this.getCategoryList
-    },
-    setValues (category, price) {
-      this.category = category
-      this.price = price
-    },
-    checkCategory () {
-      this.haveCategory = false
-      this.categories.forEach((item) => {
-        if (item === this.category) { this.haveCategory = true }
-      })
-      // return haveCategory
-    },
-    parseAddress () {
-      this.category = this.$route.params.category
-      this.price = this.$route.query.value
+    deletecontext () {
+      this.deleteRecord()
+      this.clearCurrentRecord()
+      this.$modal.close('ContextForm')
     }
   },
   mounted () {
-    this.onGetCategory()
-    this.parseAddress()
-    this.checkCategory()
-    if (!this.haveCategory) {
-      this.showcategory = true
-      this.newcategory = this.category
-    }
-    if (this.haveCategory && this.price > 0) {
-      this.save()
-    }
+
   }
 }
 </script>
 
-<style lang="sass">
+<style module lang="sass">
 
-.newcategorybutton
-  width: 150px
+.context
+  width: 250px
+  gap: 30px
 
+  &__item
+    width: 100%
 </style>

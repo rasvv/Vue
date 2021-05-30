@@ -68,7 +68,7 @@ export default {
 
 <style lang="sass" module>
 main
-  position: relative
+  // position: relative
 
 body
   width: 800px

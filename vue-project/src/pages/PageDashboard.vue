@@ -1,9 +1,6 @@
 <template>
 <div class="main">
-  <!-- <div>Dashboard</div> -->
-  <!-- <button @click="onChangeVisibleForm">Форма добавления данных</button> -->
-  <PaymentsForm v-show="checked"/>
-  <PaymentsList :items="paymentsList"/>
+  <PaymentsList />
 </div>
 </template>
 
@@ -18,7 +15,6 @@ export default {
   },
   data () {
     return {
-      // checked: false
     }
   },
   methods: {
@@ -28,7 +24,7 @@ export default {
     ]),
     checkHash (category, price) {
       if (category !== '' && price !== '') {
-        this.checked = true
+        this.$modal.open('PaymentsForm')
       }
     }
   },
@@ -36,7 +32,7 @@ export default {
     if (this.$route.params.command === 'add' &&
       this.$route.params.target === 'payment'
     ) {
-      this.checked = true
+      this.$modal.open('PaymentsForm')
     }
   },
   created () {

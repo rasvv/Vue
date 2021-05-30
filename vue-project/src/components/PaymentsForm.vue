@@ -7,7 +7,8 @@
     </select>
     <input placeholder="Описание" class="paymentsform__description" v-model="description">
     <input placeholder="Цена" class="paymentsform__price" v-model.number="price">
-    <button class="button" @click="save">Добавить</button>
+    <button class="button" v-if="newRecord" @click="newsave">Добавить</button>
+    <button class="button" v-else @click="save">Редактировать</button>
   </div>
 </template>
 
@@ -22,36 +23,43 @@ export default {
       description: '',
       categories: [],
       price: 0,
-      showcategory: false,
       address: '',
-      haveCategory: false
+      haveCategory: false,
+      showcategory: false,
+      currentRecord: [],
+      newRecord: false
     }
   },
   computed: {
     ...mapGetters([
       'getCategoryList',
-      'getFullPaymentsList'
+      'getFullPaymentsList',
+      'getCurrentRecord'
     ])
   },
   methods: {
     ...mapActions([
       'addFullData',
-      'addCategoryData'
+      'addCategoryData',
+      'changeRecord'
     ]),
-    save () {
+    newsave () {
       const { date, category, description, price } = this
       const rec = [{ date, category, description, price }]
       this.addFullData(rec)
+      this.$modal.close('PaymentsForm')
     },
-    addcategory () {
-      this.addCategoryData(this.newcategory)
-      this.onGetCategory()
-    },
-    onChangeVisibleForm () {
-      this.showcategory = !this.showcategory
+    save () {
+      const { date, category, description, price } = this
+      const rec = [{ date, category, description, price }]
+      this.changeRecord(rec)
+      this.$modal.close('PaymentsForm')
     },
     onGetCategory () {
       this.categories = this.getCategoryList
+    },
+    onGetCurrentRecord () {
+      this.currentRecord = this.getCurrentRecord
     },
     setValues (category, price) {
       this.category = category
@@ -73,6 +81,16 @@ export default {
     this.onGetCategory()
     this.parseAddress()
     this.checkCategory()
+    this.onGetCurrentRecord()
+    if (this.currentRecord.length !== 0) {
+      this.date = this.currentRecord.date
+      this.category = this.currentRecord.category
+      this.description = this.currentRecord.description
+      this.price = this.currentRecord.price
+      this.newRecord = false
+    } else {
+      this.newRecord = true
+    }
     if (!this.haveCategory) {
       this.showcategory = true
       this.newcategory = this.category
@@ -115,6 +133,6 @@ $block-height: 30px
     box-sizing: border-box
 .button
   height: $block-height
-  width: 80px
+  // width: 80px
 
 </style>

@@ -1,5 +1,6 @@
 <template>
   <div class="list">
+    <button @click="addRecord">Добавить запись</button>
     <div class="list__table" :style="style">
       <div class="list__header">
         <div class="list__header-cell date">Дата</div>
@@ -14,7 +15,7 @@
         <div class="list__data-cell category">{{ item.category }}</div>
         <div class="list__data-cell description">{{ item.description }}</div>
         <div class="list__data-cell price">{{ item.price }}</div>
-        <div class="list__data-cell context" @click="openContextMenu">...</div>
+        <div class="list__data-cell context" @click="openContextMenu(index)">...</div>
       </div>
     </div>
     <Paginator
@@ -23,18 +24,12 @@
       :currentlyPage = "page"
       @paginate = "onPaginate"
     />
-    <button @click="openPaymentsForm">Open</button>
-    <button @click="closePaymentsForm">Close</button>
-    <button @click="openCategoryForm">Open</button>
-    <button @click="closeCategoryForm">Close</button>
-    <button @click="openContextMenu">Open</button>
-    <button @click="closeContextMenu">Close</button>
   </div>
 </template>
 
 <script>
 import Paginator from './Paginator'
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
   components: {
@@ -61,24 +56,21 @@ export default {
     }
   },
   methods: {
+    ...mapActions([
+      'fetchCurrentRecord'
+    ]),
     onPaginate (page) {
       this.page = page
       // this.$router.replace() .page = this.page
       this.$route.params.page = this.page
     },
-    openPaymentsForm () {
+    addRecord () {
       this.$modal.open('PaymentsForm')
     },
-    closePaymentsForm () {
-      this.$modal.close('PaymentsForm')
-    },
-    openCategoryForm () {
-      this.$modal.open('CategoryForm')
-    },
-    closeCategoryForm () {
-      this.$modal.close('CategoryForm')
-    },
-    openContextMenu () {
+    openContextMenu (index) {
+      // const index = this.currentElements.findIndex(el => el.price === this.currentElements.item.price)
+      const id = (this.page - 1) * this.size + index
+      this.fetchCurrentRecord(id)
       this.$modal.open('ContextForm')
     },
     closeContextMenu () {

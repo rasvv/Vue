@@ -2,13 +2,10 @@
   <div :class="[$style.wrapper]">
     <div :class="[$style.overlay]"></div>
     <div :class="[$style.content]">
-      <header>{{ name }}</header>
+      <!-- <header>{{ name }}</header> -->
       <PaymentsForm v-if="name === 'PaymentsForm'" />
       <CategoryForm v-if="name === 'CategoryForm'" />
       <ContextForm v-if="name === 'ContextForm'" />
-    </div>
-    <div :class="[$style.footer]">
-      <button @click='onClose()'>Close</button>
     </div>
   </div>
 </template>
@@ -38,34 +35,36 @@ export default {
 
 <style module lang="sass">
 .wrapper
-  border: 1px solid red
-  position: absolute
-  z-index: 2
-  width: 100%
-  height: 100%
+  // border: 1px solid red
+  // position: absolute
+  display: flex
+  justify-content: center
+  // z-index: 2
+  // width: 100vw
+  // height: 100vh
+  // top: 0
+  // left: 0
+  // right: 0
+  // bottom: 0
 
-.overlay
-  z-index: 0
-  position: absolute
-  opacity: 0
-  top: 0
-  left: 0
-  right: 0
-  bottom: 0
+  // background: rgba(50,50,50,0.5)
+  margin: 0 auto
 
-  // background: rgba(50,50,50,0.2)
-  background: #eee
+  .overlay
+    z-index: 0
+    position: absolute
+    // opacity: 0
+    top: 0
+    left: 0
+    right: 0
+    bottom: 0
 
-.content
-  position: relative
-  z-index: 100
+    background: rgba(50,50,50,0.5)
+    // background: #eee
 
-  .footer
-    position: relative
-    padding-left: 15px
-
-    button
-      height: 25px
-      width: 100px
+  .content
+    // position: relative
+    z-index: 100
+    background: #fff
 
 </style>

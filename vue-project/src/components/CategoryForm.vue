@@ -1,7 +1,7 @@
 <template>
-    <div class="newcategory" v-show="showcategory">
-      <input placeholder="Новая категория" class="newcategory__category" v-model="newcategory">
-      <button class="newcategorybutton button" @click="addcategory">Добавить категорию</button>
+    <div :class="[$style.newcategory]" >
+      <input :class="[$style.newcategory__category]" placeholder="Новая категория" v-model="newcategory">
+      <button :class="[$style.newcategory__button]" @click="addcategory">Добавить категорию</button>
     </div>
 </template>
 
@@ -10,7 +10,7 @@ import { mapGetters, mapActions } from 'vuex'
 export default {
   data () {
     return {
-      showcategory: false,
+      newcategory: '',
       address: '',
       haveCategory: false
     }
@@ -24,24 +24,12 @@ export default {
     ...mapActions([
       'addCategoryData'
     ]),
-    save () {
-      const { date, category, description, price } = this
-      const rec = [{ date, category, description, price }]
-      this.addFullData(rec)
-    },
     addcategory () {
       this.addCategoryData(this.newcategory)
       this.onGetCategory()
     },
-    onChangeVisibleForm () {
-      this.showcategory = !this.showcategory
-    },
     onGetCategory () {
       this.categories = this.getCategoryList
-    },
-    setValues (category, price) {
-      this.category = category
-      this.price = price
     },
     checkCategory () {
       this.haveCategory = false
@@ -70,9 +58,20 @@ export default {
 }
 </script>
 
-<style lang="sass">
+<style module lang="sass">
+$block-height: 30px
+.newcategory
+  width: 450px
+  padding: 15px
 
-.newcategorybutton
-  width: 150px
+  &__button
+    width: 150px
+    height: $block-height
+    box-sizing: border-box
+
+  &__category
+    height: $block-height
+    box-sizing: border-box
+    margin-right: 10px
 
 </style>
