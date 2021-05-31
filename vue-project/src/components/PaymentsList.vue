@@ -1,6 +1,7 @@
 <template>
   <div class="list">
     <button @click="addRecord">Добавить запись</button>
+    <button @click="addCategory">Добавить категорию</button>
     <div class="list__table" :style="style">
       <div class="list__header">
         <div class="list__header-cell date">Дата</div>
@@ -66,6 +67,9 @@ export default {
     },
     addRecord () {
       this.$modal.open('PaymentsForm')
+    },
+    addCategory () {
+      this.$modal.open('CategoryForm')
     },
     openContextMenu (index) {
       // const index = this.currentElements.findIndex(el => el.price === this.currentElements.item.price)
