@@ -21,16 +21,16 @@
       ".*\\.(vue)$": "<rootDir>/node_modules/vue-jest",
       "^.+\\.(js)$": "<rootDir>/node_modules/babel-jest"
     },
-		"collectCoverage": true,
-		"collectCoverageFrom": [
-			"**/*.{js,vue}", 
-			"!**/none_modules/**", 
-			"!**/*.eslintrc.js",
-			"!**/*babel.config.js",
-			"!**/*block-navigation.js",
-			"!**/*prettify.js",
-			"!**/*sorter.js"
-		]
+    "collectCoverage": true,
+    "collectCoverageFrom": [
+      "**/*.{js,vue}",
+      "!**/none_modules/**",
+      "!**/*.eslintrc.js",
+      "!**/*babel.config.js",
+      "!**/*block-navigation.js",
+      "!**/*prettify.js",
+      "!**/*sorter.js"
+    ]
   },
   "devDependencies": {
     "@babel/core": "^7.14.3",

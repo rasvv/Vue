@@ -41,11 +41,11 @@
         <h4>Поле для заполнения: </h4>
 
         <label>
-          <input type="radio" id="left" value="Операнд1" v-model="picked" />
+          <input type="radio" id="left" value="Операнд1" v-model="picked" name="radio1"/>
           Операнд1
         </label>
         <label>
-          <input type="radio" id="right" value="Операнд2" v-model="picked" />
+          <input type="radio" id="right" value="Операнд2" v-model="picked" name="radio2"/>
           Операнд2
         </label>
       </div>

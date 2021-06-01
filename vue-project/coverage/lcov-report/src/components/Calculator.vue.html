@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">78.95% </span>
+                <span class="strong">94.74% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>15/19</span>
+                <span class='fraction'>18/19</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">55.56% </span>
+                <span class="strong">77.78% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>5/9</span>
+                <span class='fraction'>7/9</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">90% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>9/10</span>
+                <span class='fraction'>10/10</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">78.95% </span>
+                <span class="strong">94.74% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>15/19</span>
+                <span class='fraction'>18/19</span>
             </div>
         
             
@@ -55,7 +55,7 @@
             Press <em>n</em> or <em>j</em> to go to the next uncovered block, <em>b</em>, <em>p</em> or <em>k</em> for the previous block.
         </p>
     </div>
-    <div class='status-line medium'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -321,7 +321,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-yes">10x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -357,14 +357,14 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">20x</span>
+<span class="cline-any cline-yes">20x</span>
+<span class="cline-any cline-yes">20x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -496,11 +496,11 @@
         &lt;h4&gt;Поле для заполнения: &lt;/h4&gt;
 &nbsp;
         &lt;label&gt;
-          &lt;input type="radio" id="left" value="Операнд1" v-model="picked" /&gt;
+          &lt;input type="radio" id="left" value="Операнд1" v-model="picked" name="radio1"/&gt;
           Операнд1
         &lt;/label&gt;
         &lt;label&gt;
-          &lt;input type="radio" id="right" value="Операнд2" v-model="picked" /&gt;
+          &lt;input type="radio" id="right" value="Операнд2" v-model="picked" name="radio2"/&gt;
           Операнд2
         &lt;/label&gt;
       &lt;/div&gt;
@@ -556,13 +556,13 @@ export default {
     },
     fill (num) {
       const { picked } = this
-<span class="branch-1 cbranch-no" title="branch not covered" >      const oper = picked === 'Операнд1' ? 'oper1' : 'oper2'</span>
+      const oper = picked === 'Операнд1' ? 'oper1' : 'oper2'
       this[oper] = +(this[oper] += String(num))
     },
-<span class="fstat-no" title="function not covered" >    backSpace () {</span>
-<span class="cstat-no" title="statement not covered" >      const { picked } = this</span>
-<span class="cstat-no" title="statement not covered" >      const oper = picked === 'Операнд1' ? 'oper1' : 'oper2'</span>
-<span class="cstat-no" title="statement not covered" >      this[oper] = Math.trunc(this[oper] / 10)</span>
+    backSpace () {
+      const { picked } = this
+<span class="branch-1 cbranch-no" title="branch not covered" >      const oper = picked === 'Операнд1' ? 'oper1' : 'oper2'</span>
+      this[oper] = Math.trunc(this[oper] / 10)
     }
   }
 }
@@ -658,7 +658,7 @@ button
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Tue Jun 01 2021 17:26:54 GMT+0300 (Москва, стандартное время)
+                at Tue Jun 01 2021 20:24:24 GMT+0300 (Москва, стандартное время)
             </div>
         </div>
         <script src="../../prettify.js"></script>
