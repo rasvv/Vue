@@ -6,12 +6,12 @@
 </template>
 
 <script>
-import calculator from './components/calculator.vue'
+import Calculator from './components/Calculator.vue'
 
 export default {
   name: 'App',
   components: {
-    calculator
+    Calculator
   }
 }
 </script>
