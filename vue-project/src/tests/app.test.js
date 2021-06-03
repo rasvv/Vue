@@ -1,16 +1,11 @@
-// import App from './App.vue'
-// import { mount, createLocalVue } from '@vue/test-utils'
+import App from '../App.vue'
+import { mount } from '@vue/test-utils'
 
-// describe('App logic test', () => {
-// 	test('Test Sum operation', () => {
-// 		const Wrapper = mount(App)
-// 		let oper1 = Wrapper.find('input[name="oper1"]')
-// 		oper1.setValue(125)
-// 		let oper2 = Wrapper.find('input[name="oper2"]')
-// 		oper2.setValue(15)
-// 		let sumBtn = Wrapper.find('button[name="+"]')
-// 		sumBtn.trigger('click')
-
-// 		expect(Wrapper.vm.result).toBe(140)
-// 	})
-// })
+describe('App logic test', () => {
+	test('Test Sum operation', () => {
+		const Wrapper = mount(App)
+		let Calculator = Wrapper.vm.Calculator
+		Calculator = './components/Calculator.vue'
+		expect(Wrapper.vm.Calculator).toBe('./components/Calculator.vue')
+	})
+})
