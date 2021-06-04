@@ -1,25 +1,19 @@
 <template>
-  <v-app id="app" :class="[$style.app]">
-    <v-app-bar
-			:class="[$style.header]"
-			app
-			color="primary"
-			dark
-		>
-      <router-link :class="[$style.link]" to="/dashboard">Dashboard</router-link>
-      <router-link :class="[$style.link]" to="/about">About</router-link>
-      <router-link :class="[$style.link]" to="/404">404</router-link>
-      <br>
-      <h2>Подсчет расходов</h2>
+  <v-app>
+    <v-app-bar app flat>
+      <v-btn plain :ripple="false" to="/dashboard">Dashboard</v-btn>
+      <v-btn plain :ripple="false" to="/about">About</v-btn>
+      <v-btn plain :ripple="false" to="/404">404</v-btn>
     </v-app-bar>
     <v-main>
+      <h2>Подсчет расходов</h2>
       <router-view />
-      <transition  name='fade'>
+      <!-- <transition  name='fade'>
         <ModalWindow
           v-if='modalWindow'
           :name='modalWindow'
         />
-      </transition>
+      </transition> -->
     </v-main>
   </v-app>
 </template>
@@ -29,22 +23,22 @@
 export default {
   name: 'App',
   components: {
-    ModalWindow: () => import('./components/ModalWindow')
+    // ModalWindow: () => import('./components/ModalWindow')
   },
   data () {
     return {
       // modalShow: false,
-      modalWindow: false
+      // modalWindow: false
       // modalWindowSettings: {}
     }
   },
   methods: {
     onOpened ({ name }) {
-      this.modalWindow = name
+      // this.modalWindow = name
       // this.modalWindowSettings = settings
     },
     onClosed () {
-      this.modalWindow = ''
+      // this.modalWindow = ''
       // this.modalWindowSettings = {}
     }
   },
@@ -87,7 +81,7 @@ button
   margin: 10px 0
 
 a
-	margin: 15px
-	font-size: 14px
+  margin: 15px
+  font-size: 14px
 
 </style>
