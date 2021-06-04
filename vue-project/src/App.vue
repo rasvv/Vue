@@ -1,13 +1,18 @@
 <template>
-  <div id="app" :class="[$style.app]">
-    <header :class="[$style.header]">
+  <v-app id="app" :class="[$style.app]">
+    <v-app-bar
+			:class="[$style.header]"
+			app
+			color="primary"
+			dark
+		>
       <router-link :class="[$style.link]" to="/dashboard">Dashboard</router-link>
       <router-link :class="[$style.link]" to="/about">About</router-link>
       <router-link :class="[$style.link]" to="/404">404</router-link>
       <br>
       <h2>Подсчет расходов</h2>
-    </header>
-    <main>
+    </v-app-bar>
+    <v-main>
       <router-view />
       <transition  name='fade'>
         <ModalWindow
@@ -15,8 +20,8 @@
           :name='modalWindow'
         />
       </transition>
-    </main>
-  </div>
+    </v-main>
+  </v-app>
 </template>
 
 <script>

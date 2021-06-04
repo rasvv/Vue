@@ -12,6 +12,6 @@ Vue.use(modal)
 new Vue({
   render: h => h(App),
   store,
-  router,
-  vuetify
+  vuetify,
+  router
 }).$mount('#app')
