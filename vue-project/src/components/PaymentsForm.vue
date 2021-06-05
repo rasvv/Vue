@@ -103,36 +103,36 @@ export default {
 </script>
 
 <style lang="sass">
-$block-height: 30px
-.paymentsform
-  padding: 15px
-  // height: $block-height
-  margin-bottom: 15px
-  // box-sizing: border-box
-  border: 1px solid #000
-  background: #fff
+// $block-height: 30px
+// .paymentsform
+//   padding: 15px
+//   // height: $block-height
+//   margin-bottom: 15px
+//   // box-sizing: border-box
+//   border: 1px solid #000
+//   background: #fff
 
-  &__date
-    margin-right: 10px
-    height: $block-height
-    box-sizing: border-box
-  &__category
-    width: 120px
-    margin-right: 10px
-    height: $block-height
-    box-sizing: border-box
-  &__description
-    width: 250px
-    margin-left: 10px
-    height: $block-height
-    box-sizing: border-box
-  &__price
-    width: 70px
-    margin: 0 10px
-    height: $block-height
-    box-sizing: border-box
-.button
-  height: $block-height
-  // width: 80px
+//   &__date
+//     margin-right: 10px
+//     height: $block-height
+//     box-sizing: border-box
+//   &__category
+//     width: 120px
+//     margin-right: 10px
+//     height: $block-height
+//     box-sizing: border-box
+//   &__description
+//     width: 250px
+//     margin-left: 10px
+//     height: $block-height
+//     box-sizing: border-box
+//   &__price
+//     width: 70px
+//     margin: 0 10px
+//     height: $block-height
+//     box-sizing: border-box
+// .button
+//   height: $block-height
+//   // width: 80px
 
 </style>

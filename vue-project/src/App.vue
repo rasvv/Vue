@@ -6,14 +6,13 @@
       <v-btn plain :ripple="false" to="/404">404</v-btn>
     </v-app-bar>
     <v-main>
-      <h2>Подсчет расходов</h2>
       <router-view />
-      <!-- <transition  name='fade'>
-        <ModalWindow
+        <transition  name='fade'>
+          <ModalWindow
           v-if='modalWindow'
           :name='modalWindow'
         />
-      </transition> -->
+      </transition>
     </v-main>
   </v-app>
 </template>
@@ -23,23 +22,23 @@
 export default {
   name: 'App',
   components: {
-    // ModalWindow: () => import('./components/ModalWindow')
+    ModalWindow: () => import('./components/ModalWindow')
   },
   data () {
     return {
       // modalShow: false,
-      // modalWindow: false
+      modalWindow: false
       // modalWindowSettings: {}
     }
   },
   methods: {
     onOpened ({ name }) {
-      // this.modalWindow = name
+      this.modalWindow = name
       // this.modalWindowSettings = settings
     },
     onClosed () {
-      // this.modalWindow = ''
-      // this.modalWindowSettings = {}
+      this.modalWindow = ''
+      this.modalWindowSettings = {}
     }
   },
   mounted () {
@@ -69,19 +68,19 @@ export default {
 main
   // position: relative
 
-body
-  width: 800px
-  margin: 0 auto
+// body
+//   width: 800px
+//   margin: 0 auto
 
-.header
-  color: red
-  font-size: 24px
+// .header
+//   color: red
+//   font-size: 24px
 
-button
-  margin: 10px 0
+// button
+//   margin: 10px 0
 
-a
-  margin: 15px
-  font-size: 14px
+// a
+//   margin: 15px
+//   font-size: 14px
 
 </style>
