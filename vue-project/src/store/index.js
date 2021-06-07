@@ -27,9 +27,6 @@ export default new Vuex.Store({
     setPaymentsListData (state, payload) {
       state.paymentsList = payload
     },
-    setPaginatedPaymentsListData (state, payload) {
-      state.paginatedPaymentsList = payload
-    },
     setFullPaymentsListData (state, payload) {
       state.fullPaymentsList = payload
       window.localStorage.setItem(this.myDataJson, this.getFullPaymentsList)
@@ -44,7 +41,6 @@ export default new Vuex.Store({
   getters: {
     getPaymentsList: state => state.paymentsList,
     getFullPaymentsList: state => state.fullPaymentsList,
-    getPaginatedPaymentsList: state => state.paginatedPaymentsList,
     getCategoryList: state => state.categoryList,
     getCurrentRecord: state => state.currentRecord
   },
@@ -88,12 +84,6 @@ export default new Vuex.Store({
     fetchFullData ({ commit }) {
       // this.myJson = Json.parse()
       return commit('setFullPaymentsListData', this.state.myDataJson)
-    },
-    fetchData ({ commit }, attr) {
-      const pageNumber = attr[0]
-      const size = attr[1]
-
-      return commit('setPaginatedPaymentsListData', this.state.fullPaymentsList.slice(pageNumber * size, pageNumber * size + size))
     },
     fetchCurrentRecord ({ commit }, index) {
       const arr = this.state.fullPaymentsList[index]

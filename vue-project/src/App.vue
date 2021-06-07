@@ -65,22 +65,5 @@ export default {
 </style>
 
 <style lang="sass" module>
-main
-  // position: relative
-
-// body
-//   width: 800px
-//   margin: 0 auto
-
-// .header
-//   color: red
-//   font-size: 24px
-
-// button
-//   margin: 10px 0
-
-// a
-//   margin: 15px
-//   font-size: 14px
 
 </style>

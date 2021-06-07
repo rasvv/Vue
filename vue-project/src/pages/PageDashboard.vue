@@ -1,9 +1,10 @@
 <template>
-<!-- <v-main class="main"> -->
-  <v-row>
+<v-container>
+  <v-row class="row">
     <v-col>
-      <h2>Подсчет расходов</h2>
+      <h2 class="my-5">Подсчет расходов</h2>
       <v-btn
+        class="mr-7"
         color="teal"
         dark
         @click="addRecord"
@@ -22,10 +23,9 @@
     </v-col>
     <v-col>
       <ApexChart />
-      Diagram
     </v-col>
   </v-row>
-<!-- </v-main> -->
+</v-container>
 </template>
 
 <script>
@@ -76,7 +76,8 @@ export default {
 </script>
 
 <style lang="sass">
-.main
-  position: absolute
+.row
+  // position: absolute
+  // width: 1600px
 
 </style>

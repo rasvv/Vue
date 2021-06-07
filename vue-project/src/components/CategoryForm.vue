@@ -1,8 +1,15 @@
 <template>
-    <div :class="[$style.newcategory]" >
-      <input :class="[$style.newcategory__category]" placeholder="Новая категория" v-model="newcategory">
-      <button :class="[$style.newcategory__button]" @click="addcategory">Добавить категорию</button>
-    </div>
+  <v-container>
+    <v-text-field
+      label='Новая категория'
+      v-model='newcategory'
+      hide-details='auto'
+    ></v-text-field>
+    <v-btn
+			@click='addcategory'
+			class="mt-5"
+		> Добавить категорию </v-btn>
+  </v-container>
 </template>
 
 <script>
@@ -27,6 +34,7 @@ export default {
     addcategory () {
       this.addCategoryData(this.newcategory)
       this.onGetCategory()
+      this.$modal.close('CategoryForm')
     },
     onGetCategory () {
       this.categories = this.getCategoryList
@@ -36,7 +44,6 @@ export default {
       this.categories.forEach((item) => {
         if (item === this.category) { this.haveCategory = true }
       })
-      // return haveCategory
     },
     parseAddress () {
       this.category = this.$route.params.category
@@ -58,20 +65,6 @@ export default {
 }
 </script>
 
-<style module lang="sass">
-$block-height: 30px
-.newcategory
-  width: 450px
-  padding: 15px
-
-  &__button
-    width: 150px
-    height: $block-height
-    box-sizing: border-box
-
-  &__category
-    height: $block-height
-    box-sizing: border-box
-    margin-right: 10px
+<style module lang='sass'>
 
 </style>
