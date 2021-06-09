@@ -6,12 +6,10 @@ import dataJson from './data.json'
 import categoriesJson from './categories.json'
 
 Vue.use(Vuex)
-// Vue.use(Json)
 
 export default new Vuex.Store({
   data () {
     return {
-      // myJson: Json
     }
   },
   state: {
@@ -45,7 +43,6 @@ export default new Vuex.Store({
     getCurrentRecord: state => state.currentRecord
   },
   actions: {
-    // paginateData ({ commit }, size) { },
     addFullData ({ commit }, rec) {
       let haveData = false
       this.state.fullPaymentsList.forEach((item) => {
@@ -61,10 +58,10 @@ export default new Vuex.Store({
       }
     },
     changeRecord ({ commit }, rec) {
-      this.state.fullPaymentsList[this.state.currentRecord.idx].date = rec[0].date
-      this.state.fullPaymentsList[this.state.currentRecord.idx].category = rec[0].category
-      this.state.fullPaymentsList[this.state.currentRecord.idx].description = rec[0].description
-      this.state.fullPaymentsList[this.state.currentRecord.idx].price = rec[0].price
+      this.state.fullPaymentsList[this.state.currentRecord.index - 1].date = rec[0].date
+      this.state.fullPaymentsList[this.state.currentRecord.index - 1].category = rec[0].category
+      this.state.fullPaymentsList[this.state.currentRecord.index - 1].description = rec[0].description
+      this.state.fullPaymentsList[this.state.currentRecord.index - 1].price = rec[0].price
       return commit('setFullPaymentsListData', this.state.fullPaymentsList)
     },
     addCategoryData ({ commit }, rec) {
@@ -76,18 +73,18 @@ export default new Vuex.Store({
         return commit('setCategoryListData', this.state.categoryList.concat(rec))
       }
     },
-    deleteRecord ({ commit }) {
-      const arr1 = this.state.fullPaymentsList.slice(0, this.state.currentRecord.idx)
-      const arr2 = this.state.fullPaymentsList.slice(this.state.currentRecord.idx + 1)
+    deleteRecord ({ commit }, rec) {
+      const arr1 = this.state.fullPaymentsList.slice(0, rec.index - 1)
+      const arr2 = this.state.fullPaymentsList.slice(rec.index)
       return commit('setFullPaymentsListData', arr1.concat(arr2))
     },
     fetchFullData ({ commit }) {
       // this.myJson = Json.parse()
       return commit('setFullPaymentsListData', this.state.myDataJson)
     },
-    fetchCurrentRecord ({ commit }, index) {
-      const arr = this.state.fullPaymentsList[index]
-      arr.idx = index
+    fetchCurrentRecord ({ commit }, arr) {
+      // const arr = this.state.fullPaymentsList[index]
+      // arr.idx = arr.index
       return commit('setCurrentRecord', arr)
     },
     clearCurrentRecord ({ commit }) {

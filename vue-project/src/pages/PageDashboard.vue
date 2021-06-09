@@ -1,7 +1,13 @@
 <template>
-<v-container>
+<v-container
+  class="d-flex justify-center"
+>
   <v-row class="row">
-    <v-col>
+    <v-col
+        cols="12"
+        sm="6"
+        md="8"
+    >
       <h2 class="my-5">Подсчет расходов</h2>
       <v-btn
         class="mr-7"
@@ -21,7 +27,10 @@
       </v-btn>
       <PaymentsList />
     </v-col>
-    <v-col>
+    <v-col
+      cols="6"
+      md="4"
+    >
       <ApexChart />
     </v-col>
   </v-row>
@@ -46,9 +55,11 @@ export default {
   methods: {
     ...mapActions([
       'fetchFullData',
-      'fetchCategoryData'
+      'fetchCategoryData',
+      'clearCurrentRecord'
     ]),
     addRecord () {
+      this.clearCurrentRecord()
       this.$modal.open('PaymentsForm')
     },
     addCategory () {
@@ -76,8 +87,5 @@ export default {
 </script>
 
 <style lang="sass">
-.row
-  // position: absolute
-  // width: 1600px
 
 </style>

@@ -1,6 +1,12 @@
 <template>
-  <v-app>
-    <v-app-bar app flat>
+  <v-app
+		class="d-flex justify-center"
+	>
+    <v-app-bar
+			app
+			flat
+			class="d-flex justify-center"
+		>
       <v-btn plain :ripple="false" to="/dashboard">Dashboard</v-btn>
       <v-btn plain :ripple="false" to="/about">About</v-btn>
       <v-btn plain :ripple="false" to="/404">404</v-btn>

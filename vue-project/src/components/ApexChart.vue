@@ -1,15 +1,27 @@
 <template>
   <v-container class="mx-auto">
-    <apexchart
-      width='380'
-      type='donut'
-      :options='options'
-      :series='series'
-      class="mt-10 mb-4"
-    ></apexchart>
-    <v-btn
-      @click="getValues"
-    >Обновить</v-btn>
+    <v-row
+      class="d-flex justify-center mb-6 mt-7"
+    >
+      <apexchart
+        width='380'
+        type='donut'
+        :options='options'
+        :series='series'
+        class="mt-10 mb-4"
+      ></apexchart>
+    </v-row>
+    <v-row
+      class="d-flex justify-center mb-6"
+    >
+      <v-spaser></v-spaser>
+      <v-btn
+        color="blue darken-1"
+        text
+        @click="getValues"
+      >Обновить</v-btn>
+      <!-- <v-spaser></v-spaser> -->
+    </v-row>
   </v-container>
 </template>
 

@@ -1,53 +1,102 @@
 <template>
-  <v-container>
-   <v-menu
-      v-model="menu"
-      :close-on-content-click="true"
-      :nudge-right="40"
-      transition="scale-transition"
-      offset-y
-      min-width="auto"
-    >
-      <template v-slot:activator="{ on, attrs }">
-        <v-text-field
-          v-model="date"
-          label="Дата"
-          prepend-icon="mdi-calendar"
-          v-bind="attrs"
-          v-on="on"
-        ></v-text-field>
-      </template>
-      <v-date-picker
-        v-model="date"
-      ></v-date-picker>
-    </v-menu>
-    <v-select
-      v-model="category"
-      :items="getCategoryList"
-      label="Категория"
-    ></v-select>
-    <v-text-field
-      label='Описание'
-      v-model='description'
-      hide-details='auto'
-    ></v-text-field>
-    <v-text-field
-      label='Цена'
-      v-model='price'
-      hide-details='auto'
-      value=0
-    ></v-text-field>
-    <v-btn
-      v-if="newRecord"
-      @click="newsave"
-      class="mt-7 mx-auto"
-    >Добавить</v-btn>
-    <v-btn
-      v-else
-      @click="save"
-      class="mt-7 mx-auto"
-    >Редактировать</v-btn>
-  </v-container>
+  <v-dialog
+    v-model="dialog"
+    width="600px"
+  >
+    <v-card>
+      <v-card-title>
+        <span class="text-h5">Новые данные</span>
+      </v-card-title>
+
+      <v-card-text>
+          <v-row>
+            <v-col
+              cols="12"
+              sm="6"
+              md="4"
+            >
+            <v-menu
+                v-model="menu"
+                :close-on-content-click="true"
+                :nudge-right="40"
+                transition="scale-transition"
+                offset-y
+                min-width="auto"
+              >
+                <template v-slot:activator="{ on, attrs }">
+                  <v-text-field
+                    v-model="date"
+                    label="Дата"
+                    prepend-icon="mdi-calendar"
+                    v-bind="attrs"
+                    v-on="on"
+                  ></v-text-field>
+                </template>
+                <v-date-picker
+                  v-model="date"
+                ></v-date-picker>
+              </v-menu>
+            </v-col>
+            <v-col
+              cols="12"
+              sm="6"
+              md="4"
+            >
+              <v-select
+                v-model="category"
+                :items="getCategoryList"
+                label="Категория"
+              ></v-select>
+            </v-col>
+            <v-col
+              cols="12"
+              sm="6"
+              md="4"
+            >
+              <v-text-field
+                v-model="price"
+                label="Цена"
+              ></v-text-field>
+            </v-col>
+            <v-col
+              cols="12"
+              sm="6"
+              md="4"
+            >
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-text-field
+              v-model="description"
+              label="Описание"
+            ></v-text-field>
+          </v-row>
+      </v-card-text>
+
+      <v-card-actions>
+        <v-spacer></v-spacer>
+        <v-btn
+          color="blue darken-1"
+          text
+          @click="close"
+        >
+          Отменить
+        </v-btn>
+        <v-btn
+          color="blue darken-1"
+          text
+          v-if="newRecord"
+          @click="newsave"
+        >Добавить</v-btn>
+        <v-btn
+          v-else
+          color="blue darken-1"
+          text
+          @click="save"
+        >Редактировать</v-btn>
+      </v-card-actions>
+    </v-card>
+  </v-dialog>
 </template>
 
 <script>
@@ -66,7 +115,8 @@ export default {
       haveCategory: false,
       showcategory: false,
       currentRecord: [],
-      newRecord: false
+      newRecord: false,
+      dialog: true
     }
   },
   computed: {
@@ -82,18 +132,21 @@ export default {
       'addCategoryData',
       'changeRecord'
     ]),
-    newsave () {
+    prepareData () {
       let { date, category, description, price } = this
       price = +price
       const rec = [{ date, category, description, price }]
-      this.addFullData(rec)
-      this.$modal.close('PaymentsForm')
+      return rec
+    },
+    newsave () {
+      this.addFullData(this.prepareData())
+      this.close()
     },
     save () {
-      let { date, category, description, price } = this
-      price = +price
-      const rec = [{ date, category, description, price }]
-      this.changeRecord(rec)
+      this.changeRecord(this.prepareData())
+      this.close()
+    },
+    close () {
       this.$modal.close('PaymentsForm')
     },
     onGetCategory () {
