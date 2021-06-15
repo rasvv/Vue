@@ -98,16 +98,12 @@ export default {
     ]),
     editItem (id) {
       this.fetchCurrentRecord(id)
-      // this.editRecord()
-      // this.$modal.close('ContextForm')
       this.$modal.open('PaymentsForm')
-      // this.clearCurrentRecord()
     },
     deleteItem (id) {
       this.fetchCurrentRecord(id)
       this.deleteRecord(id)
       this.clearCurrentRecord()
-      // this.$modal.close('ContextForm')
     },
     openContextMenu (index) {
       const id = (this.page - 1) * this.size + index
