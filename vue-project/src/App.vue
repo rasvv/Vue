@@ -7,9 +7,9 @@
 			flat
 			class="d-flex justify-center"
 		>
-      <v-btn plain :ripple="false" to="/dashboard">Dashboard</v-btn>
-      <v-btn plain :ripple="false" to="/about">About</v-btn>
-      <v-btn plain :ripple="false" to="/404">404</v-btn>
+      <v-btn plain :ripple="false" to="/dashboard">Расходы</v-btn>
+      <v-btn plain :ripple="false" to="/about">О программе</v-btn>
+      <!-- <v-btn plain :ripple="false" to="/404">404</v-btn> -->
     </v-app-bar>
     <v-main>
       <router-view />
